@@ -23,7 +23,7 @@ app.post("/convert", async (req, res) => {
   console.log(file.mimetype);
 
   if (!(file.mimetype == "video/mp4" || "video/wmv" || "video/avi")) {
-    res.status(404).send("Video Format is Not Supported");
+    res.status(404).send("Video Format Is Not Supported");
   }
   const folderName = file.name.split(".")[0];
   const filenames = [];
@@ -32,6 +32,7 @@ app.post("/convert", async (req, res) => {
   fs.mkdir(path.join(__dirname, folderName), (err) => {
     if (err) {
       console.error(`Error creating root folder: ${err}`);
+      res.send(err);
     } else {
       console.log(`Root folder created successfully.`);
 
